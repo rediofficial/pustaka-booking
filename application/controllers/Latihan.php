@@ -11,7 +11,11 @@ class Latihan extends CI_Controller
 
     function index()
     {
-        echo "Selamat Belajar Web Programing II";
+        // echo "Selamat Belajar Web Programing II";
+        $this->load->view('templates/headher');
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+        $this->load->view('templates/footer');
     }
     public function penjumlahan($n1, $n2)
     {
