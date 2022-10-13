@@ -15,14 +15,22 @@ class Latihan extends CI_Controller
         $this->load->view('templates/headher');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
+        $this->load->view('tables');
         $this->load->view('templates/footer');
     }
     public function penjumlahan($n1, $n2)
     {
+
         $this->load->model('Model_latihan1');
         $data['nilai1'] = $n1;
         $data['nilai2'] = $n2;
         $data['hasil'] = $this->Model_latihan1->jumlah($n1 + $n2);
+
+
+        $this->load->view('templates/headher');
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
         $this->load->view('view_latihan', $data);
+        $this->load->view('templates/footer');
     }
 }
