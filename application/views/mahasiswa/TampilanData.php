@@ -19,7 +19,7 @@
                                     <tbody>
                                         <?php foreach ($this->ModelSiswa->getSiswa() as $data) : ?>
                                             <tr>
-                                                <td><?= $data["nama"]; ?></td>
+                                                <td><?= $data["nama_mhs"]; ?></td>
                                                 <td><?= $data["nis"]; ?></td>
                                                 <td><?= $data["kelas"]; ?></td>
                                                 <td><?= $data["tanggal_lahir"]; ?></td>

@@ -6,12 +6,12 @@ class ModelSiswa extends CI_Model
 {
     public function simpanData($data = null)
     {
-        $this->db->insert('siswa', $data);
+        $this->db->insert('mahasiswa', $data);
     }
 
     public function getSiswa()
     {
-        $q = $this->db->get('siswa');
+        $q = $this->db->get('mahasiswa');
         $data = $q->result_array();
         return $data;
     }
