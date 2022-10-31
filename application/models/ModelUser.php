@@ -5,28 +5,28 @@ class ModelUser extends CI_Model
 
     public function simpanData($data = null)
     {
-        $this->pustaka->insert('user', $data);
+        $this->db->insert('user', $data);
     }
     public function cekData($where = null)
     {
-        return $this->pustaka->get_where('user', $where);
+        return $this->db->get_where('user', $where);
     }
     public function getUserWhere($where = null)
     {
-        return $this->pustaka->get_where('user', $where);
+        return $this->db->get_where('user', $where);
     }
     public function cekUserAccess($where = null)
     {
-        $this->pustaka->select('*');
-        $this->pustaka->from('access_menu');
-        $this->pustaka->where($where);
-        return $this->pustaka->get();
+        $this->db->select('*');
+        $this->db->from('access_menu');
+        $this->db->where($where);
+        return $this->db->get();
     }
     public function getUserLimit()
     {
-        $this->pustaka->select('*');
-        $this->pustaka->from('user');
-        $this->pustaka->limit(10, 0);
-        return $this->pustaka->get();
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->limit(10, 0);
+        return $this->db->get();
     }
 }

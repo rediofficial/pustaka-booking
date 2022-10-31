@@ -10,16 +10,25 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome
-                                        Back!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Selamat Datang!</h1>
+                                    <?= $this->session->flashdata('pesan'); ?>
                                 </div>
-                                <form class="user">
+                                <form class="user" method="post" action="<?= base_url('autentifikasi'); ?>">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        <input type="email" name="email" class="form-control form-control-user" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                                        <?= form_error(
+                                            'email',
+                                            '<small class="text-danger pl-3">',
+                                            '</small>'
+                                        ); ?>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control
-form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" id="password" name="password" class="form-control form-control-user" placeholder="Password">
+                                        <?= form_error(
+                                            'password',
+                                            '<small class="text-danger pl-3">',
+                                            '</small>'
+                                        ); ?>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox
@@ -28,9 +37,9 @@ small">
                                             <label class="custom-control-label" for="customCheck">Remember Me</label>
                                         </div>
                                     </div>
-                                    <a href="latihan" class="btn btn-primary btn-user btn-block">
+                                    <button class=" btn btn-primary btn-user btn-block">
                                         Login
-                                    </a>
+                                    </button>
                                     <hr>
                                     <a href="index.html" class="btn btn-google btn-user btn-block">
                                         <i class="fab fa-google fa-fw"></i> Login with
