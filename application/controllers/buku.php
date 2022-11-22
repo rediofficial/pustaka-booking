@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Latihan extends CI_Controller
+class Buku extends CI_Controller
 {
 
     public function _construct()
@@ -30,7 +30,7 @@ class Latihan extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $data = [
-                'kategori' => $this->input->post('kategori')
+                'kategori' => $this->input->post('kategori', TRUE)
             ];
             $this->ModelBuku->simpanKategori($data);
             redirect('buku/kategori');
@@ -42,17 +42,12 @@ class Latihan extends CI_Controller
         $this->ModelBuku->hapusKategori($where);
         redirect('buku/kategori');
     }
-    public function __construct()
-    {
-        parent::__construct();
-        cek_login();
-    }
     //manajemen Buku
     public function index()
     {
         $data['judul'] = 'Data Buku';
         $data['user'] = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
-        $data['buku'] = $this->ModelBuku->tampil()->result_array();
+        $data['buku'] = $this->ModelBuku->getBuku();
         $data['kategori'] = $this->ModelBuku->getKategori()->result_array();
         $this->form_validation->set_rules('judul_buku', 'Judul
 Buku', 'required|min_length[3]', [
@@ -124,9 +119,9 @@ Penerbit', 'required|min_length[3]', [
         } else {
             if ($this->upload->do_upload('image')) {
                 $image = $this->upload->data();
-                $gambar = $image['file_name'];
+                $image = $image['file_name'];
             } else {
-                $gambar = '';
+                $image = '';
             }
             $data = [
                 'judul_buku' => $this->input->post(
@@ -147,10 +142,10 @@ Penerbit', 'required|min_length[3]', [
                 'stok' => $this->input->post('stok', true),
                 'dipinjam' => 0,
                 'dibooking' => 0,
-                'image' => $gambar
+                'image' => $image
             ];
             $this->ModelBuku->simpanBuku($data);
-            redirect('buku');
+            redirect('buku/index');
         }
     }
     public function ubahBuku()
@@ -218,7 +213,7 @@ Penerbit', 'required|min_length[3]', [
                 'numeric' => 'Yang anda masukan bukan angka'
             ]
         );
-        //konfigurasi sebelum gambar diupload
+        //konfigurasi sebelum image diupload
         $config['upload_path'] = './assets/img/upload/';
         $config['allowed_types'] = 'jpg|png|jpeg';
         $config['max_size'] = '3000';
@@ -237,9 +232,9 @@ Penerbit', 'required|min_length[3]', [
             if ($this->upload->do_upload('image')) {
                 $image = $this->upload->data();
                 unlink('assets/img/upload/' . $this->input->post('old_pict', TRUE));
-                $gambar = $image['file_name'];
+                $image = $image['file_name'];
             } else {
-                $gambar = $this->input->post('old_pict', TRUE);
+                $image = $this->input->post('old_pict', TRUE);
             }
             $data = [
                 'judul_buku' => $this->input->post(
@@ -258,7 +253,7 @@ Penerbit', 'required|min_length[3]', [
                 'tahun_terbit' => $this->input->post('tahun', true),
                 'isbn' => $this->input->post('isbn', true),
                 'stok' => $this->input->post('stok', true),
-                'image' => $gambar
+                'image' => $image
             ];
             $this->ModelBuku->updateBuku($data, ['id' => $this->input->post('id')]);
             redirect('buku');

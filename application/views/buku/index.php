@@ -40,6 +40,7 @@
                             <td><?= $b['stok']; ?></td>
                             <td><?= $b['dipinjam']; ?></td>
                             <td><?= $b['dibooking']; ?></td>
+                            <td><?= $b['image']; ?></td>
                             <td>
                                 <picture>
                                     <source srcset="" type="image/svg+xml">
@@ -79,7 +80,7 @@
                         <select name="id_kategori" class="form-control form-control-user">
                             <option value="">Pilih Kategori</option>
                             <?php foreach ($kategori as $k) { ?>
-                                <option value="<?= $k['id']; ?>"><?= $k['kategori']; ?></option>
+                                <option value="<?= $k['id_kategori']; ?>"><?= $k['nama_kategori']; ?></option>
                             <?php } ?>
                         </select>
                     </div>
